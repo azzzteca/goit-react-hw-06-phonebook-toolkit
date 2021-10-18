@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
+import { createReducer } from '@reduxjs/toolkit';
+import * as actions from './contacts-actions';
 import { v4 as uuidv4 } from 'uuid';
-import * as types from './contacts-types';
 
 const itemsInitialState = [
   { id: uuidv4(), name: 'Rosie Simpson', number: '459-12-56' },
@@ -9,34 +10,15 @@ const itemsInitialState = [
   { id: uuidv4(), name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-const itemsReducer = (state = itemsInitialState, { type, payload }) => {
-  switch (type) {
-    case types.ADD:
-      return [...state, payload];
+const itemsReducer = createReducer(itemsInitialState, {
+  [actions.addContact]: (state, { payload }) => [...state, payload],
+  [actions.deleteContact]: (state, { payload }) =>
+    state.filter(contact => contact.id !== payload),
+});
 
-    case types.DELETE:
-      const stateWithoutDeletedContacts = state.filter(
-        contact => contact.id !== payload.id,
-      );
-
-      return stateWithoutDeletedContacts;
-
-    default:
-      return state;
-  }
-};
-
-const filterReducer = (state = '', { type, payload }) => {
-  switch (type) {
-    case types.FILTER:
-      return {
-        filter: payload.value.toLowerCase(),
-      };
-
-    default:
-      return state;
-  }
-};
+const filterReducer = createReducer('', {
+  [actions.filterContact]: (_, { payload }) => payload.toLowerCase(),
+});
 
 export const contactsReducer = combineReducers({
   items: itemsReducer,
