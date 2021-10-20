@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import ContactListItem from '../ContactListItem/ContactListItem';
+import { ContactListItem } from '../ContactListItem/ContactListItem';
 
-function ContactList({ contacts, filter, children }) {
+export function ContactList({ children }) {
+  const contacts = useSelector(state => state.contacts.items);
+  const filter = useSelector(state => state.contacts.filter);
+
   return (
     <div>
       <h2>Contacts</h2>
@@ -26,13 +29,6 @@ function ContactList({ contacts, filter, children }) {
     </div>
   );
 }
-
-const mapStateToProps = state => ({
-  contacts: state.contacts.items,
-  filter: state.contacts.filter,
-});
-
-export default connect(mapStateToProps)(ContactList);
 
 ContactList.propTypes = {
   contacts: PropTypes.array,
