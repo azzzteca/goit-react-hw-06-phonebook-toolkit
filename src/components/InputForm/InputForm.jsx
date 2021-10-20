@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import * as actions from '../redux/contacts-actions';
 import { useLocalStorage } from '../hooks/useLocalStoraje';
@@ -66,7 +65,3 @@ export function InputForm() {
     </form>
   );
 }
-
-InputForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
-};

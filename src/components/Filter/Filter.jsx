@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import * as actions from '../redux/contacts-actions';
 import s from './Filter.module.css';
@@ -15,10 +14,3 @@ export function Filter() {
     </label>
   );
 }
-
-Filter.propTypes = {
-  info: PropTypes.shape({
-    contacts: PropTypes.array,
-  }),
-  filterContact: PropTypes.func.isRequired,
-};

@@ -33,6 +33,5 @@ export function ContactList({ children }) {
 ContactList.propTypes = {
   contacts: PropTypes.array,
   filter: PropTypes.string,
-  deleteContact: PropTypes.func,
   children: PropTypes.node,
 };
