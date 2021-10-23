@@ -11,24 +11,25 @@ const itemsInitialState = [
 ];
 
 const itemsReducer = createReducer(itemsInitialState, {
-  [actions.addContact]: (state, { payload }) => {
-    const doubleContact = state.find(
-      contact => payload.name.toLowerCase() === contact.name.toLowerCase(),
-    );
+  [actions.addContact]: (state, { payload }) => [...state, payload],
+  //   const doubleContact = state.find(
+  //     contact => payload.name.toLowerCase() === contact.name.toLowerCase(),
+  //   );
 
-    if (doubleContact) {
-      alert(`${payload.name} is alredy in contacts`);
-      return state;
-    }
+  //   if (doubleContact) {
+  //     alert(`${payload.name} is alredy in contacts`);
+  //     return state;
+  //   }
 
-    const newContact = {
-      id: uuidv4(),
-      name: payload.name,
-      number: payload.number,
-    };
+  //   const newContact = {
+  //     id: uuidv4(),
+  //     name: payload.name,
+  //     number: payload.number,
+  //   };
 
-    return [...state, newContact];
-  },
+  //   return [...state, newContact];
+  // },
+
   [actions.deleteContact]: (state, { payload }) =>
     state.filter(contact => contact.id !== payload),
 });
