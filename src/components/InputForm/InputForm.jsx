@@ -7,6 +7,7 @@ export function InputForm() {
   const [name, setName] = useLocalStorage('name', '');
   const [number, setNumber] = useLocalStorage('number', '');
   const contacts = useSelector(state => state.contacts.items);
+  const dispatch = useDispatch();
 
   const inputChange = evt => {
     const { name, value } = evt.target;
@@ -25,8 +26,6 @@ export function InputForm() {
     }
   };
 
-  let dispatch = useDispatch();
-
   const handleFormSubmit = evt => {
     evt.preventDefault();
 
@@ -41,8 +40,8 @@ export function InputForm() {
     }
 
     dispatch(actions.addContact({ name, number }));
-    setName('');
-    setNumber('');
+    // setName('');
+    // setNumber('');
     evt.target.reset();
   };
 
